@@ -1,7 +1,7 @@
 #include "bsp/clock.h"
 #include "bsp/gpio.h"
 #include "bsp/systick.h"
-#include "bsp/spi.h"
+#include "drivers/spi/spi_bus.h"
 
 #define MAIN_LOOP_DELAY_MS           500U
 
@@ -13,16 +13,16 @@ int main(void) {
     clock_setup();
     systick_setup();
     gpio_setup();
-    spi_setup();
+    spi_bus_init();
 
     while (1) {
 
         gpio_led_toggle();
 
-        spi_cs_select();
-        spi_transfer_byte(MAIN_SPI_TEST_PATTERN_A);
-        spi_transfer_byte(MAIN_SPI_TEST_PATTERN_B);
-        spi_cs_deselect();
+        spi_bus_write_register(
+                MAIN_SPI_TEST_PATTERN_A,
+                MAIN_SPI_TEST_PATTERN_B
+        );
 
         delay_ms(MAIN_LOOP_DELAY_MS);
     }
