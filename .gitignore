@@ -8,6 +8,8 @@ build/
 *.d
 *.su
 *.lst
+*.swo
+*~
 
 # Editor / IDE
 .vscode/
