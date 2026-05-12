@@ -56,3 +56,33 @@ void max7219_clear(void) {
         max7219_write_register(reg, MAX7219_CLEAR_VALUE);
     }
 }
+
+void max7219_set_row(uint8_t row, uint8_t value) {
+
+    if ((row < 1U) || (row > 8U)) {
+
+        return;
+    }
+
+    max7219_write_register(row, value);
+}
+
+void max7219_all_on(void) {
+
+    for (uint8_t row = 1U; row <= 8U; row++) {
+
+        max7219_set_row(row, 0xFFU);
+    }
+}
+
+void max7219_checkerboard(void) {
+
+    max7219_set_row(1U, 0xAAU);
+    max7219_set_row(2U, 0x55U);
+    max7219_set_row(3U, 0xAAU);
+    max7219_set_row(4U, 0x55U);
+    max7219_set_row(5U, 0xAAU);
+    max7219_set_row(6U, 0x55U);
+    max7219_set_row(7U, 0xAAU);
+    max7219_set_row(8U, 0x55U);
+}

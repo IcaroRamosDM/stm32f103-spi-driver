@@ -4,7 +4,8 @@
 #include "drivers/spi/spi_bus.h"
 #include "drivers/max7219/max7219.h"
 
-#define MAIN_LOOP_DELAY_MS           500U
+#define MAIN_LOOP_DELAY_MS            500U
+#define MAIN_PATTERN_DELAY_MS        1000U
 
 #define MAIN_SPI_TEST_PATTERN_A      0xAAU
 #define MAIN_SPI_TEST_PATTERN_B      0x55U
@@ -21,8 +22,18 @@ int main(void) {
     while (1) {
 
         gpio_led_toggle();
+        
+        max7219_all_on();
+        delay_ms(MAIN_PATTERN_DELAY_MS);
 
-        delay_ms(MAIN_LOOP_DELAY_MS);
+        max7219_clear();
+        delay_ms(MAIN_PATTERN_DELAY_MS);
+
+        max7219_checkerboard();
+        delay_ms(MAIN_PATTERN_DELAY_MS);
+
+        max7219_clear();
+        delay_ms(MAIN_PATTERN_DELAY_MS);
     }
 
     return 0;
