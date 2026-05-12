@@ -1,6 +1,9 @@
+#include "app/app_spi_demo.h"
+
 #include "bsp/clock.h"
 #include "bsp/gpio.h"
 #include "bsp/systick.h"
+
 #include "drivers/spi/spi_bus.h"
 #include "drivers/max7219/max7219.h"
 
@@ -21,19 +24,7 @@ int main(void) {
 
     while (1) {
 
-        gpio_led_toggle();
-        
-        max7219_all_on();
-        delay_ms(MAIN_PATTERN_DELAY_MS);
-
-        max7219_clear();
-        delay_ms(MAIN_PATTERN_DELAY_MS);
-
-        max7219_checkerboard();
-        delay_ms(MAIN_PATTERN_DELAY_MS);
-
-        max7219_clear();
-        delay_ms(MAIN_PATTERN_DELAY_MS);
+        app_spi_demo_run();
     }
 
     return 0;
