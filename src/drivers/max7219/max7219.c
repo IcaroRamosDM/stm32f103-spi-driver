@@ -158,20 +158,31 @@ static void max7219_map_pixel(
         uint8_t *mapped_row,
         uint8_t *mapped_column
 ) {
+    uint8_t logical_row = row;
+    uint8_t logical_column = column;
+
+#if (MAX7219_MIRROR_X != 0U)
+    logical_column = (MAX7219_MATRIX_SIZE + 1U) - logical_column;
+#endif
+
+#if (MAX7219_MIRROR_Y != 0U)
+    logical_row = (MAX7219_MATRIX_SIZE + 1U) - logical_row;
+#endif
+
 #if (MAX7219_MATRIX_ORIENTATION == MAX7219_ORIENTATION_0)
-    *mapped_row = row;
-    *mapped_column = column;
+    *mapped_row = logical_column;
+    *mapped_column = logical_row;
 #elif (MAX7219_MATRIX_ORIENTATION == MAX7219_ORIENTATION_90)
-    *mapped_row = column;
-    *mapped_column = (MAX7219_MATRIX_SIZE + 1U) - row;
+    *mapped_row = (MAX7219_MATRIX_SIZE + 1U) - logical_row;
+    *mapped_column = logical_column;
 #elif (MAX7219_MATRIX_ORIENTATION == MAX7219_ORIENTATION_180)
-    *mapped_row = (MAX7219_MATRIX_SIZE + 1U) - row;
-    *mapped_column = (MAX7219_MATRIX_SIZE + 1U) - column;
+    *mapped_row = (MAX7219_MATRIX_SIZE + 1U) - logical_column;
+    *mapped_column = (MAX7219_MATRIX_SIZE + 1U) - logical_row;
 #elif (MAX7219_MATRIX_ORIENTATION == MAX7219_ORIENTATION_270)
-    *mapped_row = (MAX7219_MATRIX_SIZE + 1U) - column;
-    *mapped_column = row;
+    *mapped_row = logical_row;
+    *mapped_column = (MAX7219_MATRIX_SIZE + 1U) - logical_column;
 #else
-    *mapped_row = row;
-    *mapped_column = column;
+    *mapped_row = logical_column;
+    *mapped_column = logical_row;
 #endif
 }
