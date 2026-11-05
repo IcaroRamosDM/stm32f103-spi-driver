@@ -5,21 +5,13 @@
 
 #include "drivers/max7219/max7219.h"
 
-#define APP_SPI_DEMO_PATTERN_DELAY_MS      1000U
-#define APP_SPI_DEMO_PIXEL_DELAY_MS         100U
-#define APP_SPI_DEMO_MATRIX_SIZE              8U
+#define APP_SPI_DEMO_PATTERN_DELAY_MS 1000U
+#define APP_SPI_DEMO_PIXEL_DELAY_MS 100U
+#define APP_SPI_DEMO_MATRIX_SIZE 8U
 
 static const uint8_t smile_pattern[8] = {
 
-    0x3C,
-    0x42,
-    0xA5,
-    0x81,
-    0xA5,
-    0x99,
-    0x42,
-    0x3C
-};
+    0x3C, 0x42, 0xA5, 0x81, 0xA5, 0x99, 0x42, 0x3C};
 
 static void app_spi_demo_pixel_walk(void);
 
@@ -72,7 +64,6 @@ static void app_spi_demo_pixel_walk(void) {
             max7219_set_pixel(row, column, 1U);
             delay_ms(APP_SPI_DEMO_PIXEL_DELAY_MS);
             max7219_set_pixel(row, column, 0U);
-
         }
     }
 }

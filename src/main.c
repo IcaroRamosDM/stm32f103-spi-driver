@@ -7,11 +7,11 @@
 #include "drivers/spi/spi_bus.h"
 #include "drivers/max7219/max7219.h"
 
-#define MAIN_LOOP_DELAY_MS            500U
-#define MAIN_PATTERN_DELAY_MS        1000U
+#define MAIN_LOOP_DELAY_MS 500U
+#define MAIN_PATTERN_DELAY_MS 1000U
 
-#define MAIN_SPI_TEST_PATTERN_A      0xAAU
-#define MAIN_SPI_TEST_PATTERN_B      0x55U
+#define MAIN_SPI_TEST_PATTERN_A 0xAAU
+#define MAIN_SPI_TEST_PATTERN_B 0x55U
 
 int main(void) {
 
